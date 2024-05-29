@@ -1,39 +1,24 @@
 /* Resume Section */
 .split-columns {
     display: flex;
+    flex-direction: column;
     margin-top: 40px;
     margin-bottom: 20px;
-    align-items: stretch;
+    align-items: center;
 }
 
-.resume-content-left {
-    width: 30%;
-    height: fit-content;
-    margin: 0 30px;
-    /* padding: 20px; */
-    display: flex;
-    flex-direction: column;
-    /* border: 1px solid red; */
-}
-
-.resume-content-left p{ 
-    /* border: 1px solid red; */
-    padding-left: 20px;
-    padding-top:1px;
-    padding-bottom: 1px;
-}
-
-.resume-content-left-top{
-    /* width: 350px; */
-    /* border: 1px solid red; */
+.resume-content-left,
+.resume-content-right {
+    width: 100%;
+    margin: 20px 0;
+    padding: 20px;
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding-bottom: 10px;
 }
 
-.resume-content-left h2,
-.resume-content-left h3 {
+.resume-content-left-top h2,
+.resume-content-left-top h3 {
     margin-top: 10px;
     padding-left: 17px;
 }
@@ -41,15 +26,12 @@
 .three-columns {
     display: flex;
     justify-content: space-between;
-    /* border: 1px solid red; */
-
 }
 
 .skills-content {
     flex: 1;
     margin-right: 10px;
     margin-left: 10px;
-    /* border: 1px solid red; */
 }
 
 .skills-content:last-child {
@@ -59,7 +41,6 @@
 .skills-content p {
     margin-bottom: 2px;
     font-weight: bold;
-    /* text-align: center; */
     text-decoration: underline;
 }
 
@@ -79,17 +60,6 @@
 
 .certificates-content ul li {
     margin-bottom: 5px;
-}
-
-.resume-content-right {
-    /* width: 50; */
-    margin-right: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
 }
 
 .education-item {
@@ -124,15 +94,66 @@
     margin-bottom: 10px;
 }
 
-.profile-video {
+.videos-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
     margin-top: 20px;
-    text-align: center;
+}
+
+.profile-video {
+    width: 45%;
+    margin-top: 20px;
 }
 
 .profile-video iframe {
     width: 100%;
     height: 300px;
-    max-width: 560px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (min-width: 1000px) {
+    .split-columns {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .resume-content-left,
+    .resume-content-right {
+        width: 48%;
+        margin: 20px 1%;
+    }
+
+    .videos-section {
+        flex-direction: row;
+    }
+
+    .profile-video {
+        width: 48%;
+    }
+}
+
+@media (max-width: 999px) {
+    .split-columns {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .resume-content-left,
+    .resume-content-right {
+        width: 90%;
+    }
+
+    .videos-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-video {
+        width: 90%;
+    }
 }

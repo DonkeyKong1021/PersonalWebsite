@@ -24,11 +24,26 @@ body {
 }
 
 .logo {
-    margin-right: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .logo-img {
     height: 40px;
+    /* margin-right: 20px; */
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle div {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 4px 0;
 }
 
 .nav-container {
@@ -72,7 +87,6 @@ body {
 .social-media-icons {
     display: flex;
     align-items: center;
-    margin-right: 20px;
 }
 
 .social-icon {
@@ -80,6 +94,67 @@ body {
     height: 24px;
     margin-left: 10px;
     padding: 5px;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-container {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        margin-left: 20px;
+    }
 }
 
 /* Finance Sections */

@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andrew Kulas - About Me</title>
-    <link rel="stylesheet" href="css/gloabl.css">
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/index.css">
-    
     <style>
         html {
             scroll-behavior: smooth;
@@ -17,6 +16,11 @@
     <nav class="navbar">
         <div class="logo">
             <a href="index.html"><img src="images/AKlogo.png" alt="AK Logo" class="logo-img"></a>
+            <div class="menu-toggle" onclick="openSidebar()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
         <div class="nav-container">
             <ul class="nav-items">
@@ -35,6 +39,15 @@
             </a>
         </div>
     </nav>
+
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
+        <a href="index.html"><b>About Me</b></a>
+        <a href="resume.html"><b>Resume</b></a>
+        <a href="under_construction.html"><b>Portfolio</b></a>
+        <a href="finance.html"><b>Finance</b></a>
+    </div>
+
     <div class="content">
         <div class="profile" id="profile">
             <div class="picture-frame">
@@ -73,5 +86,15 @@
     <footer>
         <p>&copy; 2024 Andrew Kulas</p>
     </footer>
+
+    <script>
+        function openSidebar() {
+            document.getElementById("sidebar").style.width = "250px";
+        }
+
+        function closeSidebar() {
+            document.getElementById("sidebar").style.width = "0";
+        }
+    </script>
 </body>
 </html>
