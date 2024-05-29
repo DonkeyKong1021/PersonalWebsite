@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrew Kulas - Options Calculators</title>
+    <link rel="stylesheet" href="css/gloabl.css">
+    <link rel="stylesheet" href="css/options.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html"><img src="images/AKlogo.png" alt="AK Logo" class="logo-img"></a>
+        </div>
+        <div class="nav-container">
+            <ul class="nav-items">
+                <li class="nav-item"><a href="index.html"><b>About Me</b></a></li>
+                <li class="nav-item"><a href="resume.html"><b>Resume</b></a></li>
+                <li class="nav-item"><a href="portfolio.html"><b>Portfolio</b></a></li>
+                <li class="nav-item active"><a href="finance.html"><b>Finance</b></a></li>
+            </ul>
+        </div>
+        <div class="social-media-icons">
+            <a href="https://twitter.com" target="_blank">
+                <img src="images/twitter.png" alt="Twitter" class="social-icon">
+            </a>
+            <a href="https://www.linkedin.com/in/andrew-kulas1/" target="_blank">
+                <img src="images/linkedin.png" alt="LinkedIn" class="social-icon">
+            </a>
+            <a href="https://instagram.com" target="_blank">
+                <img src="images/instagram.png" alt="Instagram" class="social-icon">
+            </a>
+        </div>
+    </nav>
+    <nav class="finance-sections">
+        <ul class="finance-items">
+            <li class="finance-item dropdown">
+                <a href="javascript:void(0)" class="dropdown-btn">Investing</a>
+                <div class="dropdown-content">
+                    <a href="investment_return_calc.html">Investment Return Calculator</a>
+                    <a href="#">Compound Interest Calculator</a>
+                    <a href="#">Stock Profit Calculator</a>
+                    <a href="#">Mutual Fund Fee Calculator</a>
+                    <a href="#">Dividend Calculator</a>
+                    <a href="#">Portfolio Diversification Calculator</a>
+                </div>
+            </li>
+            <li class="finance-item dropdown">
+                <a href="javascript:void(0)" class="dropdown-btn">Saving</a>
+                <div class="dropdown-content">
+                    <a href="#">Savings Goal Calculator</a>
+                    <a href="#">Emergency Fund Calculator</a>
+                    <a href="#">High-Interest Savings Calculator</a>
+                    <a href="#">College Savings Calculator</a>
+                    <a href="#">CD Ladder Calculator</a>
+                </div>
+            </li>
+            <li class="finance-item dropdown">
+                <a href="javascript:void(0)" class="dropdown-btn">Retirement</a>
+                <div class="dropdown-content">
+                    <a href="#">Retirement Savings Calculator</a>
+                    <a href="#">401(k) Calculator</a>
+                    <a href="#">Pension Calculator</a>
+                    <a href="#">Roth IRA Calculator</a>
+                    <a href="#">Social Security Benefits Calculator</a>
+                    <a href="#">Retirement Income Calculator</a>
+                </div>
+            </li>
+            <li class="finance-item dropdown active">
+                <a href="javascript:void(0)" class="dropdown-btn">Options</a>
+                <div class="dropdown-content">
+                    <a href="options_pricing_calc.html" class="active">Options Profit Calculator</a>
+                    <a href="options_pricing_calc.html">Options Pricing Calculator</a>
+                    <a href="#">Covered Call Calculator</a>
+                    <a href="#">Protective Put Calculator</a>
+                    <a href="#">Collar Strategy Calculator</a>
+                </div>
+            </li>
+            <li class="finance-item dropdown">
+                <a href="javascript:void(0)" class="dropdown-btn">Tax</a>
+                <div class="dropdown-content">
+                    <a href="#">Income Tax Calculator</a>
+                    <a href="#">Capital Gains Tax Calculator</a>
+                    <a href="#">Property Tax Calculator</a>
+                    <a href="#">Sales Tax Calculator</a>
+                    <a href="#">Tax Bracket Calculator</a>
+                    <a href="#">Self-Employment Tax Calculator</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="options-content">
+        <div class="title-dropdown">
+            <h2>Options Profit Calculator</h2>
+            <!-- <h3>Calculator</h3> -->
+        </div>
+        <div class="calculator">
+            <div class="calculator-grid">
+                <div class="button-box">
+                    <div class="ticker-input">
+                        <input type="text" id="ticker" placeholder="Choose a Stock or ETF to search" />
+                    </div>                    
+                    <div class="button-box-grid">
+                        <div class="input-group">
+                            <label for="optionsType">Options Type</label>
+                            <select id="optionsType">
+                                <option value="call">Call</option>
+                                <option value="put">Put</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="sharePrice">Share Price</label>
+                            <div class="input-wrapper">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="sharePrice" placeholder="10" />
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="optionPrice">Option Price</label>
+                            <div class="input-wrapper">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="optionPrice" placeholder="10" />
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="strikePrice">Strike Price</label>
+                            <div class="input-wrapper">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="strikePrice" placeholder="10" />
+                            </div>
+                        </div>  
+                        <div class="input-group">
+                            <label for="contracts">Number Of Contracts</label>
+                            <div class="contract-wrapper">
+                                <input type="number" id="contracts" placeholder="10" />
+                            </div>
+                        </div>
+                        
+                        <button onclick="calculateProfit()">Calculate</button>
+                    </div>
+                </div>
+                <div class="result-box">
+                    <h4>Options Profit or Losses</h4>
+                    <p># of Shares = Contracts x 100</p>
+                    <div class="container">
+                        <div>
+                            <div>Share Price</div>
+                            <div>X</div>
+                            <div class="equals">Shares</div>
+                            <div class="label">Value</div>
+                        </div>
+                        <div>
+                            <div>Strike Price</div>
+                            <div>X</div>
+                            <div class="equals">Shares</div>
+                            <div class="label">Execution</div>
+                        </div>
+                        <div>
+                            <div>Options Price</div>
+                            <div>X</div>
+                            <div class="equals">Shares</div>
+                            <div class="label">Cost</div>
+                        </div>
+                    </div>
+                    <p id="result"></p>
+                    <p>Options profit is calculated by subtracting the strike price and option price from the current share price and multiplying by the number of contracts (100 shares).</p>
+                </div>
+            </div>
+        </div>
+    <footer>
+        <p>&copy; 2024 Andrew Kulas</p>
+    </footer>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>

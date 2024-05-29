@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrew Kulas - Retirement Calculators</title>
+    <link rel="stylesheet" href="css/gloabl.css">
+    <link rel="stylesheet" href="css/investment.css">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html"><img src="images/AKlogo.png" alt="AK Logo" class="logo-img"></a>
+        </div>
+        <div class="nav-container">
+            <ul class="nav-items">
+                <li class="nav-item active"><a href="index.html"><b>About Me</b></a></li>
+                <li class="nav-item"><a href="resume.html"><b>Resume</b></a></li>
+                <li class="nav-item"><a href="under_construction.html"><b>Portfolio</b></a></li>
+                <li class="nav-item"><a href="finance.html"><b>Finance</b></a></li>
+            </ul>
+        </div>
+        <div class="social-media-icons">
+            <a href="https://github.com/DonkeyKong1021" target="_blank">
+                <img src="images/github.png" alt="Github" class="social-icon">
+            </a>
+            <a href="https://www.linkedin.com/in/andrew-kulas1/" target="_blank">
+                <img src="images/linkedin.png" alt="LinkedIn" class="social-icon">
+            </a>
+        </div>
+    </nav>
+    <nav class="finance-sections">
+        <ul class="finance-items">
+            <li class="finance-item dropdown  active">
+                <a href="javascript:void(0)" class="dropdown-btn">Investing</a>
+                <div class="dropdown-content">
+                    <a href="investment_return_calc.html" class="active">Investment Return Calculator</a>
+                    <a href="under_construction.html">Compound Interest Calculator</a>
+                    <a href="under_construction.html">Stock Profit Calculator</a>
+                    <a href="under_construction.html">Mutual Fund Fee Calculator</a>
+                    <a href="under_construction.html">Dividend Calculator</a>
+                    <a href="under_construction.html">Portfolio Diversification Calculator</a>
+                </div>
+            </li>
+            <li class="finance-item dropdown">
+                <a href="javascript:void(0)" class="dropdown-btn">Saving</a>
+                <div class="dropdown-content">
+                    <a href="under_construction.html">Savings Goal Calculator</a>
+                    <a href="under_construction.html">Emergency Fund Calculator</a>
+                    <a href="under_construction.html">High-Interest Savings Calculator</a>
+                    <a href="under_construction.html">College Savings Calculator</a>
+                    <a href="under_construction.html">CD Ladder Calculator</a>
+                </div>
+            </li>
+            <li class="finance-item dropdown">
+                <a href="javascript:void(0)" class="dropdown-btn">Retirement</a>
+                <div class="dropdown-content">
+                    <a href="under_construction.html\">Retirement Savings Calculator</a>
+                    <a href="under_construction.html">401(k) Calculator</a>
+                    <a href="under_construction.html">Pension Calculator</a>
+                    <a href="under_construction.html">Roth IRA Calculator</a>
+                    <a href="under_construction.html">Social Security Benefits Calculator</a>
+                    <a href="under_construction.html">Retirement Income Calculator</a>
+                </div>
+            </li>
+            <li class="finance-item dropdown">
+                <a href="javascript:void(0)" class="dropdown-btn">Options</a>
+                <div class="dropdown-content">
+                    <a href="options_profit_calc.html">Options Profit Calculator</a>
+                    <a href="options_pricing_calc.html">Options Pricing Calculator</a>
+                    <a href="under_construction.html">Covered Call Calculator</a>
+                    <a href="under_construction.html">Protective Put Calculator</a>
+                    <a href="under_construction.html">Collar Strategy Calculator</a>
+                </div>
+            </li>
+            <li class="finance-item dropdown">
+                <a href="javascript:void(0)" class="dropdown-btn">Tax</a>
+                <div class="dropdown-content">
+                    <a href="under_construction.html">Income Tax Calculator</a>
+                    <a href="under_construction.html">Capital Gains Tax Calculator</a>
+                    <a href="under_construction.html">Property Tax Calculator</a>
+                    <a href="under_construction.html">Sales Tax Calculator</a>
+                    <a href="under_construction.html">Tax Bracket Calculator</a>
+                    <a href="under_construction.html">Self-Employment Tax Calculator</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="investment-content">
+        <div class="calculator-box">
+            <div class="tab">
+                <button class="tablinks active" onclick="openCalculator(event, 'EndAmount')">End Amount</button>
+                <button class="tablinks" onclick="openCalculator(event, 'AdditionalContribution')">Additional Contribution</button>
+                <button class="tablinks" onclick="openCalculator(event, 'ReturnRate')">Return Rate</button>
+                <button class="tablinks" onclick="openCalculator(event, 'StartingAmount')">Starting Amount</button>
+                <button class="tablinks" onclick="openCalculator(event, 'InvestmentLength')">Investment Length</button>
+            </div>
+
+            <div id="EndAmount" class="tabcontent" style="display: block;">
+                <div class="calculator">
+                    <div class="input-container">
+                        <div class="input-group">
+                            <label for="startingAmount">Starting Amount</label>
+                            <div class="input-wrapper">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="startingAmount" placeholder="20000" />
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="afterYears">After</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="afterYears" placeholder="10" />
+                                <span class="input-suffix">years</span>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="returnRate">Return Rate</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="returnRate" placeholder="6" />
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="compoundFrequency">Compound</label>
+                            <select id="compoundFrequency">
+                                <option value="annually">annually</option>
+                                <option value="semiannually">semiannually</option>
+                                <option value="quarterly">quarterly</option>
+                                <option value="monthly">monthly</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="additionalContribution">Additional Contribution</label>
+                            <div class="input-wrapper">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="additionalContribution" placeholder="1000" />
+                            </div>
+                        </div>
+                        <button class="calculate-btn" onclick="calculateEndAmount()">Calculate</button>
+                    </div>
+                    <div class="result-container">
+                        <h4>Results</h4>
+                        <p id="endAmountResult">End Amount: $0.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other calculator tab contents go here -->
+
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Andrew Kulas</p>
+    </footer>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>

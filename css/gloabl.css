@@ -1,0 +1,173 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(168, 166, 166);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: white;
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    margin-right: 20px;
+}
+
+.logo-img {
+    height: 40px;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.nav-items {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-item:not(:last-child) {
+    border-right: 1px solid black;
+}
+
+.nav-item a {
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    font: inherit;
+}
+
+.nav-item a:hover {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.nav-item.active a {
+    color: red;
+}
+
+.social-media-icons {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+/* Finance Sections */
+.finance-sections {
+    background-color: #f1f1f1;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    width: 100%;
+}
+
+.finance-items {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.finance-item {
+    margin: 0 15px;
+    position: relative;
+}
+
+.finance-item a {
+    text-decoration: none;
+    color: #4433ff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.finance-item a:hover {
+    color: #000;
+}
+
+.finance-item.active > .dropdown-btn {
+    color: red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    min-width: 200px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-content a.active {
+    color: red;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-btn {
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dropdown-btn:hover {
+    color: #000;
+}
+
+/* Footer */
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}

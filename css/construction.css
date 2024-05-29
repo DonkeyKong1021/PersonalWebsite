@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    height: 100vh;
+}
+
+.construction-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.construction-content {
+    width: 800px;
+    height: 600px;
+    background-color: #f3f3f3;
+}
+
+.construction-img {
+    width: 300px;
+    height: auto;
+    margin-bottom: 75px;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+p {
+    font-size: 1.2em;
+    color: #666;
+}
