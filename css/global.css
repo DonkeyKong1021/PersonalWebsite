@@ -150,13 +150,6 @@ body {
     }
 }
 
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: flex;
-        margin-left: 20px;
-    }
-}
-
 /* Finance Sections */
 .finance-sections {
     background-color: #f1f1f1;
