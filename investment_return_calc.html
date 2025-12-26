@@ -6,32 +6,10 @@
     <title>Andrew Kulas - Investment Calculators</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/investment.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">
-            <a href="index.html"><img src="images/AKlogo.png" alt="AK Logo" class="logo-img"></a>
-        </div>
-        <div class="nav-container">
-            <ul class="nav-items">
-                <li class="nav-item"><a href="index.html"><b>About Me</b></a></li>
-                <li class="nav-item"><a href="resume.html"><b>Resume</b></a></li>
-                <li class="nav-item"><a href="portfolio.html"><b>Portfolio</b></a></li>
-                <li class="nav-item active"><a href="finance.html"><b>Finance</b></a></li>
-            </ul>
-        </div>
-        <div class="social-media-icons">
-            <a href="https://twitter.com" target="_blank">
-                <img src="images/twitter.png" alt="Twitter" class="social-icon">
-            </a>
-            <a href="https://www.linkedin.com/in/andrew-kulas1/" target="_blank">
-                <img src="images/linkedin.png" alt="LinkedIn" class="social-icon">
-            </a>
-            <a href="https://instagram.com" target="_blank">
-                <img src="images/instagram.png" alt="Instagram" class="social-icon">
-            </a>
-        </div>
-    </nav>
+    <div id="navbar-placeholder"></div>
     <nav class="finance-sections">
         <ul class="finance-items">
             <li class="finance-item dropdown active">
@@ -145,6 +123,7 @@
                     <div class="result-container">
                         <h4>Results</h4>
                         <p id="endAmountResult">End Amount: $0.00</p>
+                        <canvas id="investmentChart" style="margin-top: 20px; width: 100%; height: 250px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -352,6 +331,6 @@
     <footer>
         <p>&copy; 2024 Andrew Kulas</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

@@ -7,6 +7,46 @@ function closeSidebar() {
     document.getElementById("sidebar").style.width = "0";
 }
 
+// Load Navbar and Sidebar dynamically
+document.addEventListener("DOMContentLoaded", function() {
+    const navbarPlaceholder = document.getElementById("navbar-placeholder");
+    if (navbarPlaceholder) {
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => {
+                navbarPlaceholder.innerHTML = data;
+                setActiveNavLink();
+            })
+            .catch(error => console.error("Error loading navbar:", error));
+    }
+});
+
+function setActiveNavLink() {
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    const navLinks = document.querySelectorAll(".nav-item a");
+    const sidebarLinks = document.querySelectorAll(".sidebar a");
+
+    // Helper to set active class
+    const setActive = (links) => {
+        links.forEach(link => {
+            const href = link.getAttribute("href");
+            if (href === currentPath) {
+                // For navbar items, the class is on the li parent
+                if (link.parentElement.classList.contains("nav-item")) {
+                    document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+                    link.parentElement.classList.add("active");
+                }
+                // For sidebar, usually we might style the link itself, but let's check styles
+                // Global css: .sidebar a:hover { ... } - no active class defined for sidebar links in global.css
+                // But we can add one if needed. For now, focus on main nav.
+            }
+        });
+    };
+
+    setActive(navLinks);
+    setActive(sidebarLinks);
+}
+
 // Tab switching for calculators
 function openCalculator(event, calculatorId) {
     var i
@@ -30,6 +70,8 @@ function openCalculator(event, calculatorId) {
 }
 
 // Investment - End Amount calculator
+var investmentChart = null;
+
 function calculateEndAmount() {
     var startingAmount = parseFloat(document.getElementById("startingAmount")?.value) || 0
     var years = parseFloat(document.getElementById("afterYears")?.value) || 0
@@ -42,20 +84,88 @@ function calculateEndAmount() {
     var r = (returnRate / 100) / n
     var periods = years * n
 
-    var compoundFactor = Math.pow(1 + r, periods)
-    var futureValuePrincipal = startingAmount * compoundFactor
-    var futureValueContrib = 0
+    // Calculate growth over time for chart
+    var labels = [];
+    var dataPoints = [];
+    var balance = startingAmount;
 
-    if (r !== 0) {
-        futureValueContrib = additionalContribution * ((compoundFactor - 1) / r)
-    } else {
-        futureValueContrib = additionalContribution * periods
+    // We'll plot yearly points for cleaner graph
+    var steps = years; 
+    
+    // Initial point
+    labels.push("Year 0");
+    dataPoints.push(startingAmount);
+
+    for (var i = 1; i <= steps; i++) {
+        // Calculate balance at end of year i
+        // Using the formula year by year to accumulate contributions correctly relative to compounding
+        var periodsPerYear = n;
+        for (var p = 0; p < periodsPerYear; p++) {
+            balance = balance * (1 + r) + additionalContribution;
+        }
+        labels.push("Year " + i);
+        dataPoints.push(balance);
     }
+    
+    var endAmount = balance; // This might slightly differ from direct formula due to loop precision but matches the graph
 
-    var endAmount = futureValuePrincipal + futureValueContrib
     var resultEl = document.getElementById("endAmountResult")
     if (resultEl) {
-        resultEl.textContent = "End Amount: $" + endAmount.toFixed(2)
+        resultEl.textContent = "End Amount: $" + endAmount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    }
+
+    // Update Chart
+    var ctx = document.getElementById('investmentChart');
+    if (ctx) {
+        if (investmentChart) {
+            investmentChart.destroy();
+        }
+        
+        investmentChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Portfolio Value',
+                    data: dataPoints,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
 }
 
