@@ -242,6 +242,10 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(response => response.text())
             .then(data => {
                 navbarPlaceholder.innerHTML = data;
+                const sidebar = document.getElementById("sidebar");
+                if (sidebar) {
+                    document.body.appendChild(sidebar);
+                }
                 setActiveNavLink();
                 initRevOpsHud();
             })

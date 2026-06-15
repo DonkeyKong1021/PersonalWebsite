@@ -80,7 +80,6 @@ body {
     z-index: 1;
 }
 
-#navbar-placeholder,
 .page-route-bar,
 .content,
 .parent,
@@ -328,7 +327,7 @@ body::after {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 2000;
+    z-index: 10050;
     top: 0;
     left: 0;
     background: var(--bg-panel);
@@ -337,6 +336,7 @@ body::after {
     padding-top: 50px;
     border-right: var(--border-neon);
     box-shadow: var(--glow-cyan);
+    pointer-events: auto;
 }
 
 .sidebar-header {
