@@ -1,37 +1,62 @@
-body {
-    margin: 0;
-    height: 100vh;
-}
-
 .construction-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    flex: 1;
     text-align: center;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px 20px;
+    background-color: transparent;
 }
 
 .construction-content {
-    width: 800px;
-    height: 600px;
-    background-color: #f3f3f3;
+    width: 100%;
+    max-width: 700px;
+    padding: 48px 32px;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.construction-content.neon-card {
+    border-color: rgba(255, 42, 109, 0.4);
+    box-shadow: var(--glow-pink);
+}
+
+.construction-content h1 {
+    font-size: 1.3rem;
+    margin: 0 0 24px;
+    color: var(--neo-pink);
+    font-family: var(--font-display);
+    letter-spacing: 0.15em;
+    text-shadow: var(--glow-pink);
+}
+
+.construction-content h1::before {
+    content: "⚠ PIPELINE OFFLINE";
+    display: block;
+    font-size: 0.65rem;
+    color: var(--neo-yellow);
+    letter-spacing: 0.3em;
+    margin-bottom: 12px;
+    font-weight: 600;
 }
 
 .construction-img {
-    width: 300px;
+    width: 180px;
     height: auto;
-    margin-bottom: 75px;
+    margin-bottom: 24px;
+    opacity: 0.6;
+    filter: hue-rotate(280deg) saturate(1.5);
 }
 
-h1 {
-    font-size: 2em;
-    margin: 20px 0;
+.construction-content p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
 }
 
-p {
-    font-size: 1.2em;
-    color: #666;
+.construction-content p::before {
+    content: "SYNC PENDING // ";
+    color: var(--neo-cyan);
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
 }

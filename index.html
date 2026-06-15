@@ -3,36 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrew Kulas - About Me</title>
+    <title>Andrew Kulas - RevOps Analyst</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/index.css">
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
 </head>
 <body>
     <div id="navbar-placeholder"></div>
 
-    <div class="content">
-        <div class="profile" id="profile">
+    <div class="content operator-page terminal-output">
+<!-- 
+        <div class="metrics-hud">
+            <div class="metric-tile">
+                <div class="metric-label">AUTOMATIONS</div>
+                <div class="metric-value" data-count="47">0<span class="metric-unit"> ACTIVE</span></div>
+            </div>
+            <div class="metric-tile">
+                <div class="metric-label">CRM SYNC</div>
+                <div class="metric-value green" data-count="99.8" data-decimal="1">0<span class="metric-unit">%</span></div>
+            </div>
+            <div class="metric-tile">
+                <div class="metric-label">PIPELINES</div>
+                <div class="metric-value pink" data-count="12">0<span class="metric-unit"> LIVE</span></div>
+            </div>
+            <div class="metric-tile">
+                <div class="metric-label">UPTIME</div>
+                <div class="metric-value yellow" data-count="100">0<span class="metric-unit">%</span></div>
+            </div>
+        </div> -->
+
+        <div class="profile neon-card" id="profile">
             <div class="picture-frame">
                 <div class="profile-pic-container">
+                    <div class="scanline-overlay"></div>
                     <img src="images/headshot.JPG" alt="Picture of Andrew Kulas" class="profile-pic">
                 </div>
                 <div class="name-title">
-                    <h2>Andrew Kulas</h2>
+                    <h2 class="glitch-text" data-text="Andrew Kulas">Andrew Kulas</h2>
+                </div>
+                <div class="operator-badges">
+                    <span class="op-badge online">● ONLINE</span>
+                    <span class="op-badge vcu">VCU '24</span>
                 </div>
             </div>
             <div class="profile-description">
                 <h1>About Me</h1>
                 <p class="education-desc">
-                    I am currently working as a <b>RevOps Analyst</b> for <b>Holistiplan</b>.  My primary focus is process automation and data analysis.  In my free time, I enjoy working with electronics and woodworking.
+                    I am currently working as a <b>RevOps Analyst</b> for <b>Holistiplan</b>. My primary focus is process automation, CRM architecture, and data pipeline engineering — building the invisible infrastructure that keeps revenue teams moving fast.
                 </p>
+                <p class="education-desc secondary">
+                    Background in <b>Financial Technology</b> and <b>Mathematics</b> from VCU. When I'm not wiring up HubSpot workflows, I'm tinkering with electronics or building things in the woodshop.
+                </p>
+                <div class="pipeline-flow">
+                    <span class="pipe-node active">LEAD</span>
+                    <span class="pipe-arrow">→</span>
+                    <span class="pipe-node active">ENRICH</span>
+                    <span class="pipe-arrow">→</span>
+                    <span class="pipe-node active">ROUTE</span>
+                    <span class="pipe-arrow">→</span>
+                    <span class="pipe-node active">CONVERT</span>
+                    <span class="pipe-arrow">→</span>
+                    <span class="pipe-node retain">RETAIN</span>
+                </div>
             </div>
         </div>
+
+        <div class="operator-grid">
+            <section class="operator-panel neon-card">
+                <h2>FOCUS AREAS</h2>
+                <div class="focus-cards">
+                    <div class="focus-card">
+                        <span class="focus-icon">⚡</span>
+                        <div class="focus-body">
+                            <h3>Automation</h3>
+                            <p>HubSpot workflows, custom code actions, and trigger-based logic that removes manual work from revenue processes.</p>
+                        </div>
+                    </div>
+                    <div class="focus-card">
+                        <span class="focus-icon">◈</span>
+                        <div class="focus-body">
+                            <h3>Data Engineering</h3>
+                            <p>Python ETL pipelines, Apps Script sync layers, and structured logging for reliable, real-time CRM data.</p>
+                        </div>
+                    </div>
+                    <div class="focus-card">
+                        <span class="focus-icon">▣</span>
+                        <div class="focus-body">
+                            <h3>Revenue Analytics</h3>
+                            <p>Forecasting, segmentation, attribution frameworks, and dashboards that give teams visibility into pipeline health.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="operator-panel neon-card skills-panel">
+                <h2>ARSENAL</h2>
+                <p class="arsenal-subtitle">Skills inventory // 4 categories loaded</p>
+                <div class="arsenal-groups">
+                    <div class="arsenal-group arsenal-code">
+                        <div class="arsenal-group-header">
+                            <span class="arsenal-id">01</span>
+                            <span class="arsenal-label">CODE</span>
+                        </div>
+                        <div class="stack-tags">
+                            <span class="stack-tag python">Python</span>
+                            <span class="stack-tag">SQL</span>
+                            <span class="stack-tag">JavaScript</span>
+                            <span class="stack-tag">C++</span>
+                            <span class="stack-tag">ETL Pipelines</span>
+                        </div>
+                    </div>
+                    <div class="arsenal-group arsenal-revops">
+                        <div class="arsenal-group-header">
+                            <span class="arsenal-id">02</span>
+                            <span class="arsenal-label">REVOPS</span>
+                        </div>
+                        <div class="stack-tags">
+                            <span class="stack-tag hubspot primary">HubSpot</span>
+                            <span class="stack-tag">ChiliPiper</span>
+                            <span class="stack-tag primary">Snowflake</span>
+                            <span class="stack-tag">Metabase</span>
+                            <span class="stack-tag">Google Apps Script</span>
+                            <span class="stack-tag">REST APIs</span>
+                        </div>
+                    </div>
+                    <div class="arsenal-group arsenal-finance">
+                        <div class="arsenal-group-header">
+                            <span class="arsenal-id">03</span>
+                            <span class="arsenal-label">FINANCE</span>
+                        </div>
+                        <div class="stack-tags">
+                            <span class="stack-tag primary">Financial Modeling</span>
+                            <a href="options_pricing_calc.html" class="stack-tag python stack-tag-link">Options Pricing</a>
+                            <span class="stack-tag">Investment Analysis</span>
+                            <span class="stack-tag">Portfolio Theory</span>
+                            <span class="stack-tag">Risk Analysis</span>
+                        </div>
+                    </div>
+                    <div class="arsenal-group arsenal-hobbies">
+                        <div class="arsenal-group-header">
+                            <span class="arsenal-id">04</span>
+                            <span class="arsenal-label">HOBBIES</span>
+                        </div>
+                        <div class="stack-tags">
+                            <span class="stack-tag">Electronics</span>
+                            <span class="stack-tag">Soldering</span>
+                            <span class="stack-tag">Woodworking</span>
+                            <span class="stack-tag">AutoCAD</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="module-links">
+            <h2>EXPLORE MODULES</h2>
+            <div class="module-link-grid">
+                <a href="resume.html" class="module-link-card neon-card">
+                    <span class="mod-id">02</span>
+                    <span class="mod-name">RESUME</span>
+                    <span class="mod-desc">Education, experience &amp; playback demos</span>
+                    <span class="mod-arrow">→</span>
+                </a>
+                <a href="portfolio.html" class="module-link-card neon-card">
+                    <span class="mod-id">03</span>
+                    <span class="mod-name">NUVUE</span>
+                    <span class="mod-desc">Drone Media</span>
+                    <span class="mod-arrow">→</span>
+                </a>
+            </div>
+        </section>
+
     </div>
+
     <footer>
         <p>&copy; 2024 Andrew Kulas</p>
     </footer>

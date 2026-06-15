@@ -7,8 +7,235 @@ function closeSidebar() {
     document.getElementById("sidebar").style.width = "0";
 }
 
+const PAGE_MAP = {
+    "index.html":       { module: "OPERATOR",   route: "/operator/profile",      label: "Operator Profile" },
+    "resume.html":      { module: "RESUME",     route: "/resume/cv",               label: "Resume" },
+    "under_construction.html": { module: "PIPELINE", route: "/pipeline/projects", label: "Project Pipeline" },
+    "woodworking.html": { module: "WORKSHOP",   route: "/workshop/builds",         label: "Workshop Builds" },
+    "finance.html":     { module: "ANALYTICS",  route: "/analytics/finance",       label: "Finance Analytics" },
+    "portfolio.html":   { module: "NUVUE",      route: "/nuvue/media",             label: "NuVue Media" },
+    "investment_return_calc.html": { module: "ANALYTICS", route: "/analytics/investment", label: "Investment Calc" },
+    "options_pricing_calc.html":   { module: "ANALYTICS", route: "/analytics/options",    label: "Options Pricing" },
+    "options_profit_calc.html":    { module: "ANALYTICS", route: "/analytics/profit",     label: "Options Profit" },
+    "revops.html":      { module: "REVOPS",     route: "/revops/command",          label: "RevOps Command" },
+    "videos.html":      { module: "PLAYBACK",   route: "/resume/playback",         label: "Playback Archive" }
+};
+
+function getCurrentPage() {
+    return window.location.pathname.split("/").pop() || "index.html";
+}
+
+function initRevOpsHud() {
+    const currentPath = getCurrentPage();
+    const pageInfo = PAGE_MAP[currentPath] || { module: "SYSTEM", route: "/system", label: "System" };
+
+    const moduleLabel = document.getElementById("hud-module-label");
+    if (moduleLabel) {
+        moduleLabel.textContent = `MODULE: ${pageInfo.module}`;
+    }
+
+    injectRouteBar(pageInfo);
+    initOperatorPage();
+}
+
+function initOperatorPage() {
+    animateMetricCounters();
+
+    document.querySelectorAll(".pipe-node.active").forEach((node, i) => {
+        node.style.animationDelay = `${i * 0.4}s`;
+    });
+}
+
+function animateMetricCounters() {
+    const counters = document.querySelectorAll(".metric-value[data-count]");
+    if (!counters.length) return;
+
+    counters.forEach(el => {
+        const target = parseFloat(el.dataset.count);
+        const decimals = parseInt(el.dataset.decimal || "0", 10);
+        const unit = el.querySelector(".metric-unit");
+        const unitHTML = unit ? unit.outerHTML : "";
+        const duration = 1400;
+        const start = performance.now();
+
+        function tick(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = target * eased;
+            const display = decimals > 0 ? current.toFixed(decimals) : Math.round(current);
+            el.innerHTML = display + unitHTML;
+            if (progress < 1) requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
+    });
+}
+
+function injectRouteBar(pageInfo) {
+    const mainContent = document.querySelector(".content, .parent, .construction-container, .investment-content, .options-content, .revops-page, .operator-page, .videos-page, .portfolio-page");
+    if (!mainContent || document.querySelector(".page-route-bar")) return;
+
+    const bar = document.createElement("div");
+    bar.className = "page-route-bar";
+    bar.innerHTML = `<span><span class="route-prefix">ROUTE &gt;</span><span class="route-path">${pageInfo.route}</span></span><span class="route-status">● ${pageInfo.label.toUpperCase()} LOADED</span>`;
+    mainContent.parentNode.insertBefore(bar, mainContent);
+}
+
+function initSnakeGrid() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const GRID = 40;
+    const MAX_LENGTH = 36;
+    const TAIL_FADE_MS = 2200;
+
+    const canvas = document.createElement("canvas");
+    canvas.className = "snake-grid-canvas";
+    canvas.setAttribute("aria-hidden", "true");
+    document.body.prepend(canvas);
+
+    const ctx = canvas.getContext("2d");
+    let snake = [];
+    let lastCell = null;
+    let rafId = null;
+
+    function resize() {
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = Math.floor(window.innerWidth * dpr);
+        canvas.height = Math.floor(window.innerHeight * dpr);
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function cellFromPoint(clientX, clientY) {
+        return {
+            x: Math.floor(clientX / GRID),
+            y: Math.floor(clientY / GRID)
+        };
+    }
+
+    function cellsBetween(from, to) {
+        if (!from) return [to];
+
+        const path = [];
+        let x0 = from.x;
+        let y0 = from.y;
+        const x1 = to.x;
+        const y1 = to.y;
+        const dx = Math.abs(x1 - x0);
+        const dy = Math.abs(y1 - y0);
+        const sx = x0 < x1 ? 1 : -1;
+        const sy = y0 < y1 ? 1 : -1;
+        let err = dx - dy;
+
+        while (true) {
+            path.push({ x: x0, y: y0 });
+            if (x0 === x1 && y0 === y1) break;
+            const e2 = 2 * err;
+            if (e2 > -dy) {
+                err -= dy;
+                x0 += sx;
+            }
+            if (e2 < dx) {
+                err += dx;
+                y0 += sy;
+            }
+        }
+
+        return path;
+    }
+
+    function pushCells(cells) {
+        const now = performance.now();
+
+        cells.forEach(cell => {
+            if (lastCell && lastCell.x === cell.x && lastCell.y === cell.y) return;
+            snake.unshift({ x: cell.x, y: cell.y, born: now });
+            lastCell = cell;
+        });
+
+        const cutoff = now - TAIL_FADE_MS;
+        snake = snake.filter(seg => seg.born >= cutoff);
+
+        if (snake.length > MAX_LENGTH) {
+            snake.length = MAX_LENGTH;
+        }
+    }
+
+    function handlePointer(clientX, clientY) {
+        const target = cellFromPoint(clientX, clientY);
+        const path = cellsBetween(lastCell, target);
+        const newCells = lastCell ? path.slice(1) : path;
+        if (newCells.length) pushCells(newCells);
+        scheduleDraw();
+    }
+
+    function draw() {
+        rafId = null;
+        const now = performance.now();
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        ctx.clearRect(0, 0, width, height);
+
+        snake = snake.filter(seg => seg.born >= now - TAIL_FADE_MS);
+
+        snake.forEach((seg, index) => {
+            const age = (now - seg.born) / TAIL_FADE_MS;
+            const trail = 1 - index / Math.max(snake.length, 1);
+            const alpha = Math.max(0.08, (1 - age) * trail);
+            const isHead = index === 0;
+            const pad = 1;
+            const x = seg.x * GRID + pad;
+            const y = seg.y * GRID + pad;
+            const size = GRID - pad * 2;
+
+            if (isHead) {
+                ctx.fillStyle = `rgba(0, 240, 255, ${Math.min(0.75, alpha + 0.35)})`;
+                ctx.fillRect(x, y, size, size);
+                ctx.strokeStyle = `rgba(255, 42, 109, ${Math.min(0.9, alpha + 0.4)})`;
+                ctx.lineWidth = 1.5;
+                ctx.strokeRect(x + 0.5, y + 0.5, size - 1, size - 1);
+            } else {
+                const hueShift = index / snake.length;
+                const r = Math.round(5 + (0 - 5) * hueShift);
+                const g = Math.round(255 - (255 - 240) * hueShift);
+                const b = Math.round(161 - (161 - 255) * hueShift);
+                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.55})`;
+                ctx.fillRect(x, y, size, size);
+            }
+        });
+
+        if (snake.length) {
+            scheduleDraw();
+        }
+    }
+
+    function scheduleDraw() {
+        if (!rafId) {
+            rafId = requestAnimationFrame(draw);
+        }
+    }
+
+    window.addEventListener("mousemove", e => handlePointer(e.clientX, e.clientY));
+    window.addEventListener("touchmove", e => {
+        if (e.touches[0]) {
+            handlePointer(e.touches[0].clientX, e.touches[0].clientY);
+        }
+    }, { passive: true });
+
+    window.addEventListener("resize", () => {
+        resize();
+        scheduleDraw();
+    });
+
+    resize();
+}
+
 // Load Navbar and Sidebar dynamically
 document.addEventListener("DOMContentLoaded", function() {
+    initSnakeGrid();
+
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
     if (navbarPlaceholder) {
         fetch("navbar.html")
@@ -16,29 +243,27 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(data => {
                 navbarPlaceholder.innerHTML = data;
                 setActiveNavLink();
+                initRevOpsHud();
             })
             .catch(error => console.error("Error loading navbar:", error));
+    } else {
+        initRevOpsHud();
     }
 });
 
 function setActiveNavLink() {
-    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    const currentPath = getCurrentPage();
     const navLinks = document.querySelectorAll(".nav-item a");
     const sidebarLinks = document.querySelectorAll(".sidebar a");
 
-    // Helper to set active class
     const setActive = (links) => {
         links.forEach(link => {
             const href = link.getAttribute("href");
             if (href === currentPath) {
-                // For navbar items, the class is on the li parent
                 if (link.parentElement.classList.contains("nav-item")) {
                     document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
                     link.parentElement.classList.add("active");
                 }
-                // For sidebar, usually we might style the link itself, but let's check styles
-                // Global css: .sidebar a:hover { ... } - no active class defined for sidebar links in global.css
-                // But we can add one if needed. For now, focus on main nav.
             }
         });
     };
